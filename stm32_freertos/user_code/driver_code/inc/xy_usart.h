@@ -5,10 +5,10 @@
 #include <stdio.h>
 
 
-extern void USART1_Config(void);
-extern void USART1_Timeout_UserCallback(void);
+void USART1_Config(int bpr);
+void USART1_Timeout_UserCallback(void);
 
-#if 1
+#if 0
 
 extern int fputc(int ch, FILE *f);
 extern int fgetc(FILE *f);
