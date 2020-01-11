@@ -17,7 +17,7 @@ int main(void)
 	
 	
 #if USE_STM32_SYSTEM_CUBE					//是否使用STM32CUBE工具生成的代码，是的话就是下面的创建函数，它里面有会跳转到最原始FreeRTOS的xTaskCreate创建函数和vTaskStartScheduler（）
-	MX_FREERTOS_Init();					    //开始穿件第一个任务
+	MX_FREERTOS_Init();					    //开始创建第一个任务
 	osKernelStart();						//系统调度。 正常情况下永远运行不到这一步
 #else
 	

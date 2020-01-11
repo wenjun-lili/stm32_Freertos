@@ -551,36 +551,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>user_driver</GroupName>
-          <Files>
-            <File>
-              <FileName>xy_usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\user_code\driver_code\src\xy_usart.c</FilePath>
-            </File>
-            <File>
-              <FileName>systick.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\user_code\driver_code\src\systick.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>user_app</GroupName>
-          <Files>
-            <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\user_code\app_code\src\main.c</FilePath>
-            </File>
-            <File>
-              <FileName>freertos.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\user_code\app_code\src\freertos.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>FreeRtos_file</GroupName>
           <Files>
             <File>
@@ -627,6 +597,51 @@
               <FileName>cmsis_os.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\system_code\FreeRTOS\Source\CMSIS_RTOS\cmsis_os.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>user_driver</GroupName>
+          <Files>
+            <File>
+              <FileName>systick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user_code\driver_code\src\systick.c</FilePath>
+            </File>
+            <File>
+              <FileName>xy_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user_code\driver_code\src\xy_usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>xy_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user_code\driver_code\src\xy_key.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>user_app</GroupName>
+          <Files>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user_code\app_code\src\main.c</FilePath>
+            </File>
+            <File>
+              <FileName>xy_config.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user_code\app_code\src\xy_config.c</FilePath>
+            </File>
+            <File>
+              <FileName>freertos.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user_code\app_code\src\freertos.c</FilePath>
+            </File>
+            <File>
+              <FileName>xy_usart1_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user_code\app_code\src\xy_usart1_task.c</FilePath>
             </File>
           </Files>
         </Group>

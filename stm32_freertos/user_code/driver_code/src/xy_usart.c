@@ -13,7 +13,7 @@
 #include "xy_usart.h"
 #include <string.h>
 
-
+USART_Message Usart1;
 /**
   * @brief  USART1_NVIC_Config(void)
 	* @datail 配置USART1接收中断
@@ -70,10 +70,11 @@ void USART1_Config(int bpr)
 	#if 0
 	USART_Cmd(USART1, ENABLE);					//无中断模式
     #elif 1
-	USART_Cmd(USART1, ENABLE);					//中断模式
 	USART1_NVIC_Config();
-	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);	
+	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);				//接受中断
+	USART_ITConfig(USART1, USART_IT_IDLE, ENABLE);				//空闲中断
 	USART_ClearFlag(USART1, USART_FLAG_TC);
+	USART_Cmd(USART1, ENABLE);									//中断模式
     #endif
 }
 
@@ -91,32 +92,6 @@ int fgetc(FILE *f)
 	while (USART_GetFlagStatus(USART1, USART_FLAG_RXNE) == RESET);
 	return (int)USART_ReceiveData(USART1);
 }
-#endif
-
- 
-
-
-
-#if 1
-
-/**
-  * @brief  USART1_IRQHandler(void)
-	* @datail USART1 中断处理程序
-	* @param  none
-	* @return none
-  */ 
-void USART1_IRQHandler(void)
-{
-
-	
-	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
-	{ 	
-		 USART_ClearITPendingBit(USART1, USART_IT_RXNE);//  清除中断标志位
-		 
-	} 
-
-}
-
 #endif
 
 /********************************END OF FILE************************/

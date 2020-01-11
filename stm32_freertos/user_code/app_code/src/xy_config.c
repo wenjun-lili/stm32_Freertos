@@ -14,6 +14,7 @@ void XY_driver_init(void)
 	NVIC_Config();							//中断向量配置
 	bsp_InitTimer();						//系统滴定时器配置（中断）  给Freertos 提供心跳节拍
 	USART1_Config(9600);					//串口初始化 波特率：9600   printf调试用
+	Key_EXTI_Config();
 }
 
 

@@ -23,7 +23,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
-
+#include "xy_config.h"
 
 
 /** @addtogroup STM32F10x_StdPeriph_Examples
@@ -152,6 +152,38 @@ void SysTick_Handler(void)
 /*  file (startup_stm32f10x_xx.s).                                            */
 /******************************************************************************/
 
+
+
+/*
+函数功能：串口1 中断服务函数
+*/
+void USART1_IRQHandler(void)
+{
+	char ch = 0;
+	static int i = 0;					
+	
+	if(USART1->SR & (1 << 5))						//接收中断
+	{
+		USART1->SR &= ~(0X1 << 5);					//清除接受中断标志
+		ch = USART1->DR;
+		Usart1.Recv_data[i++] = ch;					//接收数据
+		
+		if(i == 256)
+		{
+			i = 0;
+		}
+	}
+ 	else if(USART1->SR & (1 << 4))					//空闲中断
+	{
+		ch = USART1->DR;							//清除空闲中断
+		Usart1.Recv_data[i++] = '\0';
+		Usart1.recv_lenth = i;						//接收一帧的数据长度
+		i = 0;										//为了下一次接收做准备
+		Usart1.recv_ok_flag = 1;					//接收完成标志
+		Usart1.time_cnt = 0;						//清除超时时间。 表示接收到了
+		printf("data = %s\r\n",Usart1.Recv_data);
+	}
+}
 /**
   * @brief  This function handles TIM2  interrupt request.
   * @param  None
@@ -184,12 +216,14 @@ void SDIO_IRQHandler(void)
 
 
 
-
-
-
 void TIM7_IRQHandler(void)
 {
    
 }
 
+void EXTI9_5_IRQHandler(void)
+{
+	EXTI_ClearITPendingBit(EXTI_Line8);   //清中断标志位 PA8 激活按钮
+	printf("come in to the wai bu zhong duan ! \r\n");
+}
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

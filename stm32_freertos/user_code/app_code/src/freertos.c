@@ -7,11 +7,11 @@
 
 
 osThreadId defaultTaskHandle;
-
+osThreadId usart_Task_Handle;
 
 void StartDefaultTask(void const * argument);
 
-void StartDefaultTask111(void const * argument);
+void Usart1_Process_Task(void const * argument);
 
 
 /*
@@ -21,40 +21,38 @@ void StartDefaultTask111(void const * argument);
 备注：创建第一个任务，这个任务开始去创建其他任务。
 
 osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 	0,	 	128);
-说明：	    任务指针		  任务函数入口地址	优先级	  		传入的参数	堆栈大小
+说明：	    任务指针		  任务函数入口地址	优先级	  			    	堆栈大小
 
 */
+int a = 5;
 void MX_FREERTOS_Init(void) 
 {
-	XY_DEBUG("System create the first Task !\r\n");
-	osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
+	
+	XY_DEBUG("Create the StartDefaultTask  Task !\r\n");
+	osThreadDef(defaultTask, StartDefaultTask, osPriorityHigh, 0, 128);
 	defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
+
+	if(defaultTaskHandle == NULL)
+	{
+		XY_DEBUG("Create StartDefaultTask err!\r\n");
+	}
+	
 }
 
 void StartDefaultTask(void const * argument)
 {
 	
-	osThreadDef(defaultTask, StartDefaultTask111, osPriorityNormal, 0, 128);
-	defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
-
-  for(;;)
-  {
-	 printf("333\r\n");
-    osDelay(10000);
-  }
- 
-}
-
-void StartDefaultTask111(void const * argument)
-{
+	osThreadDef(usart1_task, Usart1_Process_Task, osPriorityNormal, 0, 128);					//创建串口线程
 	
-
-  for(;;)
-  {
-	 printf("2222\r\n");
-    osDelay(1000);
-  }
- 
+	usart_Task_Handle = osThreadCreate(osThread(usart1_task), NULL);
+	
+	for(;;)
+	{
+		
+		osDelay(10000);
+		
+	}
+	vTaskDelete(NULL);						//防止如果程序在跳出循环，则在这里进行删除任务，在运行的函数里用NULL表示删除当前的函数。
 }
 
 
