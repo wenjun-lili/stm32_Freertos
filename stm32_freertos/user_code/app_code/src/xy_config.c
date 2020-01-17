@@ -2,6 +2,8 @@
 
 void NVIC_Config(void);					//下面的子函数声明
 
+struct rtc_time systmtime;										//RTC时钟
+
 
 /*
 函数功能：设备外设初始化
@@ -12,9 +14,17 @@ void NVIC_Config(void);					//下面的子函数声明
 void XY_driver_init(void)
 {
 	NVIC_Config();							//中断向量配置
+	
 	bsp_InitTimer();						//系统滴定时器配置（中断）  给Freertos 提供心跳节拍
+	
 	USART1_Config(9600);					//串口初始化 波特率：9600   printf调试用
-	Key_EXTI_Config();
+	
+	Key_EXTI_Config();						//按键中断
+	
+	EValve_GPIO_Config();					//气阀GPIO初始化， 初始化完成，全部关闭
+	
+	BME280_Init();							//BME280 三合一传感器初始化			使用myiic.h中的模拟IIC通讯 
+	RTC_CheckAndConfig(&systmtime);  		//RTC初始化
 }
 
 

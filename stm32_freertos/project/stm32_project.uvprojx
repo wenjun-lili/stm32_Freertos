@@ -365,7 +365,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\system_code\CMSIS;..\system_code\stdPeriph_Driver\inc;..\system_code\FreeRTOS\Source\CMSIS_RTOS;..\system_code\FreeRTOS\Source\include;..\system_code\FreeRTOS\Source\portable\RVDS\ARM_CM3;..\user_code\app_code\inc;..\user_code\driver_code\inc</IncludePath>
+              <IncludePath>..\system_code\CMSIS;..\system_code\stdPeriph_Driver\inc;..\system_code\FreeRTOS\Source\CMSIS_RTOS;..\system_code\FreeRTOS\Source\include;..\system_code\FreeRTOS\Source\portable\RVDS\ARM_CM3;..\user_code\app_code\inc;..\user_code\driver_code\inc;..\user_code\driver_code\inc\rtc;..\user_code\driver_code\inc\BME280</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -609,6 +609,16 @@
               <FilePath>..\user_code\driver_code\src\systick.c</FilePath>
             </File>
             <File>
+              <FileName>sys.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user_code\driver_code\src\sys.c</FilePath>
+            </File>
+            <File>
+              <FileName>utility.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user_code\driver_code\src\utility.c</FilePath>
+            </File>
+            <File>
               <FileName>xy_usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\user_code\driver_code\src\xy_usart.c</FilePath>
@@ -617,6 +627,21 @@
               <FileName>xy_key.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\user_code\driver_code\src\xy_key.c</FilePath>
+            </File>
+            <File>
+              <FileName>xy_EleValve.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user_code\driver_code\src\xy_EleValve.c</FilePath>
+            </File>
+            <File>
+              <FileName>BME280.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user_code\driver_code\src\BME280\BME280.c</FilePath>
+            </File>
+            <File>
+              <FileName>myiic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user_code\driver_code\src\BME280\myiic.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -629,19 +654,39 @@
               <FilePath>..\user_code\app_code\src\main.c</FilePath>
             </File>
             <File>
-              <FileName>xy_config.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\user_code\app_code\src\xy_config.c</FilePath>
-            </File>
-            <File>
               <FileName>freertos.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\user_code\app_code\src\freertos.c</FilePath>
             </File>
             <File>
+              <FileName>xy_config.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user_code\app_code\src\xy_config.c</FilePath>
+            </File>
+            <File>
+              <FileName>xy_measure.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user_code\app_code\src\xy_measure.c</FilePath>
+            </File>
+            <File>
               <FileName>xy_usart1_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\user_code\app_code\src\xy_usart1_task.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>STM32_RTC</GroupName>
+          <Files>
+            <File>
+              <FileName>bsp_date.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user_code\driver_code\src\rtc\bsp_date.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_rtc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\user_code\driver_code\src\rtc\bsp_rtc.c</FilePath>
             </File>
           </Files>
         </Group>

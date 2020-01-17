@@ -177,13 +177,36 @@ void USART1_IRQHandler(void)
 	{
 		ch = USART1->DR;							//清除空闲中断
 		Usart1.Recv_data[i++] = '\0';
-		Usart1.recv_lenth = i;						//接收一帧的数据长度
+		Usart1.recv_lenth = i-1;						//接收一帧的数据长度
 		i = 0;										//为了下一次接收做准备
 		Usart1.recv_ok_flag = 1;					//接收完成标志
 		Usart1.time_cnt = 0;						//清除超时时间。 表示接收到了
-		printf("data = %s\r\n",Usart1.Recv_data);
+		//printf("data = %s\r\n",Usart1.Recv_data);
 	}
 }
+
+/* 看看有没有必要使能RTC秒中断 */
+void RTC_IRQHandler(void)
+{
+	
+	if (RTC_GetITStatus(RTC_IT_SEC) != RESET)
+	{
+	    /* Clear the RTC Second interrupt */
+	    RTC_WaitForLastTask();
+	    RTC_ClearITPendingBit(RTC_IT_SEC);
+	
+	    /* Wait until last write operation on RTC registers has finished */
+	    RTC_WaitForLastTask();
+	}
+	else
+	{
+		//睡眠模式，闹钟中断会进入到这里
+		RTC_WaitForLastTask();  
+	    RTC_ClearITPendingBit(RTC_IT_ALR);  //清报警中断
+	    RTC_WaitForLastTask();
+	}
+}
+
 /**
   * @brief  This function handles TIM2  interrupt request.
   * @param  None

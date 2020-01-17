@@ -15,13 +15,16 @@
 #include "systick.h"
 #include "xy_key.h"
 #include "xy_usart.h"
-
+#include "xy_EleValve.h"									//电磁阀文件
+#include "bsp_rtc.h"
+#include "myiic.h"
 /********************************   END       **********************/
 
 
 
 /*************************  user app flie  **************************/
 #include "xy_usart1_task.h"
+#include "BME280.h"
 /********************************   END       **********************/
 
 
@@ -45,6 +48,16 @@
 typedef unsigned int  	uint32_t;
 typedef int  			int32_t;
 typedef unsigned char  	uint8_t;
+/*******************************   END *******************************/
+
+
+/******************************   全局变量 **************************/
+extern struct rtc_time systmtime;										//RTC时钟
+/********************************************************************/
+
+
+
+
 /********************************   END *****************************/
 
 
